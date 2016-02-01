@@ -7,26 +7,24 @@ Elm.Tests.make = function (_elm) {
    $Basics = Elm.Basics.make(_elm),
    $Debug = Elm.Debug.make(_elm),
    $ElmTest = Elm.ElmTest.make(_elm),
+   $Game = Elm.Game.make(_elm),
    $List = Elm.List.make(_elm),
    $Maybe = Elm.Maybe.make(_elm),
    $Result = Elm.Result.make(_elm),
    $Signal = Elm.Signal.make(_elm),
    $String = Elm.String.make(_elm);
    var _op = {};
-   var all = A2($ElmTest.suite,
-   "A Test Suite",
+   var testExamples = A2($ElmTest.suite,
+   "An Example Test Suite Where All Tests Pass",
    _U.list([A2($ElmTest.test,"Addition",A2($ElmTest.assertEqual,3 + 7,10))
            ,A2($ElmTest.test,"String.left",A2($ElmTest.assertEqual,"a",A2($String.left,1,"abcdefg")))
            ,A2($ElmTest.test,"This test should pass",$ElmTest.assert(true))]));
-   var place = F4(function (board,marker,x_coord,y_coord) {    return _U.list([_U.list([]),_U.list([" ","O"]),_U.list([])]);});
-   var board = _U.list([_U.list([]),_U.list([]),_U.list([])]);
-   var noughtsAndCrossesTest = A2($ElmTest.suite,
-   "Noughts and crosses",
+   var all = A2($ElmTest.suite,
+   "Tic Tac Toe",
    _U.list([A2($ElmTest.test,
-           "Place a naught in the middle space",
-           A2($ElmTest.assertEqual,_U.list([_U.list([]),_U.list([" ","O"]),_U.list([])]),A4(place,board,"O",1,1)))
-           ,A2($ElmTest.test,
-           "Place a naught in the top right space",
-           A2($ElmTest.assertEqual,_U.list([_U.list([" "," ","O"]),_U.list([]),_U.list([])]),A4(place,board,"O",0,2)))]));
-   return _elm.Tests.values = {_op: _op,board: board,place: place,noughtsAndCrossesTest: noughtsAndCrossesTest,all: all};
+   "Begin with an empty 3x3 board",
+   A2($ElmTest.assertEqual,
+   _U.list([_U.list([_U.list([]),_U.list([]),_U.list([])]),_U.list([_U.list([]),_U.list([]),_U.list([])]),_U.list([_U.list([]),_U.list([]),_U.list([])])]),
+   $Game.board))]));
+   return _elm.Tests.values = {_op: _op,all: all,testExamples: testExamples};
 };
